@@ -1,0 +1,65 @@
+# NCHE Agent Control Plane Configuration
+# Copy this file to nche.yaml and customize as needed.
+# Environment variables override these settings.
+
+# Database connection
+database:
+  url: postgres://user:password@localhost:5432/nche
+
+# Server configuration
+server:
+  host: 127.0.0.1
+  port: 3000
+
+# Action executor configuration
+executor:
+  # Set to true to disable the background executor
+  disabled: false
+  # How often to poll for ready actions (milliseconds)
+  poll_interval_ms: 1000
+  # Maximum actions to process per poll cycle
+  batch_size: 10
+
+# Webhook dispatcher configuration
+webhooks:
+  # Set to true to disable webhook delivery
+  disabled: false
+  # How often to poll for pending webhooks (milliseconds)
+  poll_interval_ms: 5000
+  # Maximum webhooks to process per poll cycle
+  batch_size: 20
+  # Maximum retry attempts before marking as failed
+  max_retries: 5
+  # Base delay for exponential backoff (seconds)
+  # Retries: 60s, 120s, 240s, 480s, 960s
+  base_retry_delay_secs: 60
+
+# Logging configuration
+logging:
+  # Log level: trace, debug, info, warn, error
+  level: info
+  # Module-specific levels (optional)
+  # modules:
+  #   nche: debug
+  #   tower_http: debug
+
+# Policy engine configuration (future)
+# policy:
+#   blocked_email_domains:
+#     - example.com
+#     - test.local
+#   internal_domains:
+#     - company.internal
+
+# Tool configuration (future)
+# tools:
+#   email:
+#     provider: console  # console, smtp, sendgrid
+#     smtp:
+#       host: smtp.example.com
+#       port: 587
+#       username: user
+#       password: secret
+#   http:
+#     timeout_secs: 30
+#     max_response_size_bytes: 10485760  # 10MB

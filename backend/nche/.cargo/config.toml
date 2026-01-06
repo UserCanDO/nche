@@ -1,0 +1,41 @@
+# Cross-compilation configuration for NCHE
+#
+# Supported targets:
+# - x86_64-unknown-linux-musl (Linux static binary)
+# - aarch64-unknown-linux-musl (Linux ARM64 static binary)
+#
+# Prerequisites:
+# 1. Install target: rustup target add x86_64-unknown-linux-musl
+# 2. Install cross: cargo install cross
+#
+# Build commands:
+# - Native:     cargo build --release
+# - Linux x64:  cross build --release --target x86_64-unknown-linux-musl
+# - Linux ARM:  cross build --release --target aarch64-unknown-linux-musl
+
+# x86_64 Linux musl target
+[target.x86_64-unknown-linux-musl]
+# Use cross for cross-compilation (handles toolchain automatically)
+# If building natively on Linux, you can use:
+# linker = "x86_64-linux-musl-gcc"
+
+# aarch64 Linux musl target
+[target.aarch64-unknown-linux-musl]
+# Use cross for cross-compilation (handles toolchain automatically)
+# If building natively on Linux, you can use:
+# linker = "aarch64-linux-musl-gcc"
+
+# Environment variables for sqlx offline mode during cross-compilation
+[env]
+# Enable offline mode to avoid needing a live database during cross-compilation
+# Requires: cargo sqlx prepare (run once with live database)
+SQLX_OFFLINE = { value = "true", force = false }
+
+# Build settings
+[build]
+# Uncomment to set a default target:
+# target = "x86_64-unknown-linux-musl"
+
+# Profile settings (applied during cross-compilation)
+[profile.release]
+# Already configured in Cargo.toml, but can override here if needed

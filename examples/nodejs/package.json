@@ -1,0 +1,16 @@
+{
+  "name": "nche-tenant-example",
+  "version": "1.0.0",
+  "description": "Example tenant webhook server for Nche",
+  "main": "tenant-webhook-server.js",
+  "scripts": {
+    "start": "node tenant-webhook-server.js",
+    "dev": "node --watch tenant-webhook-server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
